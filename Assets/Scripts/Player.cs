@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
             touchedObject = null;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -32,14 +32,14 @@ public class Player : MonoBehaviour
                 if (hit.transform.tag == Tag.Interact)
                 {
                     touchedObject = hit.transform.gameObject.GetComponent<Interactable>();
+                    touchedObject.OnTouch();
                 }
             }
             else
             {
                 touchedObject = Sphere;
+                touchedObject.OnTouch();
             }
-
-            touchedObject.OnTouch();
         }
     }
 }
