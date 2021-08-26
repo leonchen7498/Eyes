@@ -22,16 +22,18 @@ Shader "CGCV/ToonEye"
     }
     SubShader
     {
+        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
+
         Pass
         {
             Tags {"LightMode" = "ForwardBase"}
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-            #include "UnityLightingCommon.cginc"
+         
+			 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct v2f
             {
@@ -82,7 +84,7 @@ Shader "CGCV/ToonEye"
                 fixed4 color = (irisInterior + irisBoundary + pupilInterior + pupilBoundary + sclera) * i.illumination; 
                 return color;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }
