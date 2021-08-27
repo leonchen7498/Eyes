@@ -10,9 +10,7 @@ public abstract class BasicEye : MonoBehaviour, Interactable
 
     protected bool interactable;
 
-    private float appearTimer = 0f;
     private float distanceToMove = 0.3f;
-    private bool isAppearing;
     private Vector3 endPosition;
 
     public abstract void OnLetGo();
@@ -33,24 +31,11 @@ public abstract class BasicEye : MonoBehaviour, Interactable
 
     public virtual void Update()
     {
-        if (isAppearing)
-        {
-            appearTimer += Time.deltaTime;
-            
-            if (appearTimer > timeNeededToAppear)
-            {
-                isAppearing = false;
-                interactable = true;
-            }
-        }
     }
 
     public void Appear()
     {
         StartCoroutine(EyeAppear());
-
-        //isAppearing = true;
-        //transform.localPosition = Vector3.Lerp(startPosition, endPosition, timeNeededToAppear);
     }
 
     public IEnumerator EyeAppear()
