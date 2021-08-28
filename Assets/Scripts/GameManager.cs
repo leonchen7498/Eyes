@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public float TimeNeededToShowEye = 8f;
+    public DrawEye heldEye;
+    public bool particleEffect;
+    public Sphere sphere;
 
     private List<BasicEye> eyes;
     private int AmountOfEyesSolved;

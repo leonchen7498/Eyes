@@ -96,7 +96,7 @@ Material:
     m_Floats:
     - BOOL_Channel_Blue: 0
     - BOOL_Channel_Green: 0
-    - BOOL_Channel_Red: 0
+    - BOOL_Channel_Red: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -124,12 +124,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - COL_Blue_A: {r: 1, g: 0, b: 0.8710184, a: 0}
-    - COL_Blue_B: {r: 0.5377358, g: 0.017755438, b: 0.48252124, a: 0}
-    - COL_Green_A: {r: 0.05233179, g: 1, b: 0.07832959, a: 0}
-    - COL_Green_B: {r: 0, g: 0.2901961, b: 0, a: 0}
-    - COL_Red_A: {r: 1, g: 0, b: 0, a: 0}
-    - COL_Red_B: {r: 0, g: 0, b: 0, a: 0}
+    - COL_Blue_A: {r: 0.7924528, g: 0.021290911, b: 0, a: 0}
+    - COL_Blue_B: {r: 0, g: 0, b: 0, a: 0}
+    - COL_Green_A: {r: 0.5377358, g: 0.017248094, b: 0.022141118, a: 0}
+    - COL_Green_B: {r: 0, g: 0, b: 0, a: 0}
+    - COL_Red_A: {r: 0, g: 0, b: 0, a: 0}
+    - COL_Red_B: {r: 0.2735849, g: 0.0010323755, b: 0.03620041, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

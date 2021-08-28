@@ -19,15 +19,34 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0) && touchedObject != null)
         {
-            touchedObject.OnLetGo();
+            if (touchedObject == Sphere)
+            {
+                touchedObject.OnLetGo();
+                touchedObject = null;
+                return;
+            }
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == Tag.Interact)
+                {
+                    hit.transform.gameObject.GetComponent<Interactable>().OnLetGo();
+                }
+            }
+
+            GameManager.Instance.particleEffect = false;
             touchedObject = null;
         }
 
         if (Input.GetMouseButtonDown(0))
         {
+            GameManager.Instance.heldEye = null;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (touchedObject == null && Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == Tag.Interact)
                 {
