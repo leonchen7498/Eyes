@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         }
 
         eyesClicked = new List<OrderEye>();
+        StartCoroutine(StartGame());
     }
 
     void Update()
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (AmountOfEyesSolved == 3)
+        if (AmountOfEyesSolved == 29)
         {
             StartCoroutine(Final());
         }
@@ -116,15 +117,27 @@ public class GameManager : MonoBehaviour
         playerObject.ToggleControls();
     }
 
+    public IEnumerator StartGame()
+    {
+        for (float i = 1; i > 0; i -= Time.deltaTime / 2)
+        {
+            fadeObject.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+    }
+
     public IEnumerator Final()
     {
-        for (float i = 0; i < 1f; i += Time.deltaTime / 5)
+        textObject.text = "The veil of flesh surrounds you, there's nowhere to flee.";
+
+        for (float i = 0; i < 1f; i += Time.deltaTime / 8)
         {
             fadeObject.color = new Color(0, 0, 0, i);
             yield return null;
         }
 
         playerObject.ToggleControls();
+        textObject.text = "Your mind's madness is set loose, no one hears your plea.";
 
         foreach (BasicEye eye in eyes)
         {
@@ -132,13 +145,41 @@ public class GameManager : MonoBehaviour
         }
 
         float elapsedTime = 0;
-        while (elapsedTime < 10)
+        while (elapsedTime < 8)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        textObject.text = "All the eyes look upon you, warped reality";
+
+        elapsedTime = 0;
+        while (elapsedTime < 5)
         {
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
         sphere.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-        fadeObject.enabled = false;
+        for (float i = 1; i > 0f; i -= Time.deltaTime * 2)
+        {
+            fadeObject.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+
+        elapsedTime = 0;
+        while (elapsedTime < 5)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        for (float i = 0; i < 1f; i += Time.deltaTime * 2)
+        {
+            fadeObject.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+
+        textObject.text = "To the point of no return, lonesome detainee.";
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sphere : MonoBehaviour, Interactable
 {
-    public int RotationSpeed = 100;
+    public float RotationSpeed = 100;
 
     private bool allowRotation = false;
 
