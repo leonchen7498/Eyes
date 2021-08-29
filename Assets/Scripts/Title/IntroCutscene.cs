@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroCutscene : MonoBehaviour
 {
     public TMP_Text Tmp;
     public float TransitionTime = 2;
     public string[] Dialogue;
+    public Image cutsceneImage;
 
     private int count;
     private bool dialogueFinished;
@@ -47,6 +49,13 @@ public class IntroCutscene : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
         SceneManager.LoadScene(2);
+
+        /*for (float i = 1; i >= 0; i -= Time.deltaTime * 2)
+        {
+            cutsceneImage.color = new Color(0, 0, 0, i);
+            yield return null;
+        }*/
     }
 }

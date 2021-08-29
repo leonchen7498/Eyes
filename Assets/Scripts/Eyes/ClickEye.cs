@@ -14,6 +14,11 @@ public class ClickEye : BasicEye
         if (!closed && interactable)
         {
             Solve();
+            audio.Play();
+            if (!string.IsNullOrEmpty(text))
+            {
+                GameManager.Instance.ShowText(text, durationOfText);
+            }
         }
     }
 

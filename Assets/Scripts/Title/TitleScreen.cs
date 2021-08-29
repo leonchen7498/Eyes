@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class TitleScreen : MonoBehaviour
 {
     public Image titleScreenImage;
+    public Image fade;
     public float fadeOutTime = 2;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(FadeOverlayIn());
     }
 
     // Update is called once per frame
@@ -24,13 +25,35 @@ public class TitleScreen : MonoBehaviour
         }
     }
 
+    public IEnumerator FadeOverlayIn()
+    {
+        for (float i = 0; i < 1; i += Time.deltaTime / 4)
+        {
+            titleScreenImage.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+
+        StartCoroutine(FadeOverlayOut());
+    }
+
+    public IEnumerator FadeOverlayOut()
+    {
+        for (float i = 1; i > 0; i -= Time.deltaTime / 4)
+        {
+            titleScreenImage.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+
+        StartCoroutine(FadeOverlayIn());
+    }
+
     public IEnumerator FadeOut()
     {
         float elapsedTime = 0;
 
-        for (float i = 1; i >= 0; i -= Time.deltaTime *2)
+        for (float i = 0; i < 1; i += Time.deltaTime *2)
         {
-            titleScreenImage.color = new Color(i, i, i, 1);
+            fade.color = new Color(0, 0, 0, i);
             yield return null;
         }
 

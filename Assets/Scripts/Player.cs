@@ -9,10 +9,13 @@ public class Player : MonoBehaviour
     private Interactable Sphere;
     private Interactable touchedObject;
 
+    private bool enabled;
+
     void Start()
     {
         touchedObject = null;
         Sphere = SphereObject.GetComponent<Interactable>();
+        enabled = true;
     }
 
     void Update()
@@ -40,6 +43,11 @@ public class Player : MonoBehaviour
             touchedObject = null;
         }
 
+        if (!enabled)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             GameManager.Instance.heldEye = null;
@@ -60,5 +68,10 @@ public class Player : MonoBehaviour
                 touchedObject.OnTouch();
             }
         }
+    }
+
+    public void ToggleControls()
+    {
+        enabled = !enabled;
     }
 }

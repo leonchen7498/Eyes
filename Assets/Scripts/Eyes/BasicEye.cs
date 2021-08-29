@@ -8,6 +8,10 @@ public abstract class BasicEye : MonoBehaviour, Interactable
     [HideInInspector]
     public float timeNeededToAppear;
 
+    [Header("For story")]
+    public string text;
+    public int durationOfText;
+
     [Header("For upside down eyes")]
     public bool needToBeUpsideDownToSolve;
     public SkinnedMeshRenderer skinnedMeshRenderOfEyeball;
@@ -18,11 +22,13 @@ public abstract class BasicEye : MonoBehaviour, Interactable
     protected Animator animator;
     protected bool interactable;
     protected bool closed;
+    protected AudioSource audio;
 
     protected float blinkTimer;
     protected float blinkInterval;
+    protected float delayBeforeFirstBlink;
+    protected float delayTimer;
 
-    private float distanceToMove = 0.3f;
     private Vector3 endPosition;
 
     public abstract void OnLetGo();
@@ -33,7 +39,7 @@ public abstract class BasicEye : MonoBehaviour, Interactable
         if (eyesNeededToAppear > 0)
         {
             endPosition = transform.localPosition;
-            transform.localPosition = new Vector3(transform.localPosition.x - distanceToMove, transform.localPosition.y, transform.localPosition.z);
+            transform.localPosition = transform.localPosition - (transform.forward * 0.8f);
         }
         else
         {
@@ -52,12 +58,26 @@ public abstract class BasicEye : MonoBehaviour, Interactable
             skinnedMeshRenderOfEyeball.materials = materials;
             interactable = false;
         }
+
+        audio = GetComponent<AudioSource>();
     }
 
     public virtual void Update()
     {
         if (closed)
         {
+            return;
+        }
+
+        if (delayBeforeFirstBlink > 0 && interactable)
+        {
+            delayTimer += Time.deltaTime;
+
+            if (delayTimer >= delayBeforeFirstBlink)
+            {
+                delayBeforeFirstBlink = 0;
+                delayTimer = 0;
+            }
             return;
         }
 
@@ -103,6 +123,7 @@ public abstract class BasicEye : MonoBehaviour, Interactable
         }
         transform.localPosition = endPosition;
         interactable = true;
+        blinkTimer = 0f;
     }
 
     public void Solve()
@@ -110,5 +131,11 @@ public abstract class BasicEye : MonoBehaviour, Interactable
         animator.SetBool(Parameters.Closed, true);
         closed = true;
         GameManager.Instance.EyeSolved();
+    }
+
+    public void OpenAgain()
+    {
+        closed = false;
+        animator.SetBool(Parameters.Closed, false);
     }
 }

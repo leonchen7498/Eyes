@@ -417,6 +417,7 @@ MonoBehaviour:
   - help
   - 'adaa kajn ak a kanka nkankan kk ka kan kan '
   - send help
+  cutsceneImage: {fileID: 2027698953}
 --- !u!1 &1982386167
 GameObject:
   m_ObjectHideFlags: 0

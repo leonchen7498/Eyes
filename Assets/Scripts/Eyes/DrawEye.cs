@@ -13,7 +13,12 @@ public class DrawEye : BasicEye
             if (GameManager.Instance.heldEye != null && GameManager.Instance.heldEye == EyeToConnectTo)
             {
                 Solve();
+                audio.Play();
                 GameManager.Instance.heldEye.Solve();
+                if (!string.IsNullOrEmpty(text))
+                {
+                    GameManager.Instance.ShowText(text, durationOfText);
+                }
             }
         }
     }
